@@ -1,0 +1,40 @@
+question:
+  text: I can help you with answers on all your related questions and help you to find a great job
+  answers: # for exact match with one of answers variants 
+    - text: Lets talk #variant example
+      question:
+        text: Please enter your name
+        data: name
+        question:
+          text: Hello %user_name%! How can we reach out to you?
+          answers: 
+            - text: Phone
+            - text: Email
+            - text: i dont wont to be contacted
+              question: # without variants example. User can write here a poem and after submit he will be passed to the next step
+                text: Said to hear that. Whenever you change your mind - feel fre to send me a message  
+                final: # serves like an instruction for the exit
+                  text: Hope to hear you soon! Bye!
+    # - text: i dont wont to be contacted
+    #   question:
+    #     text: 2st question
+    #     answers: 
+    #       - text: a2
+    # - text: a2
+    #   question:
+    #     text: 3st question
+    #     answers: 
+    #       - text: a3      
+    # - text: question without variants?
+    #   question:
+    #     text: time?
+    #     store: time
+    #     answers: 
+    #       - text: ASAP
+    #       - text: Morning
+    #       - text: evening
+    #       - text: when u can
+    # - text: end?
+    #   final:
+    #     prefix: happy 
+    #     text: Thank you, for your time
