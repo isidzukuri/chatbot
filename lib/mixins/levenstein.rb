@@ -29,9 +29,9 @@ module Chat
 			distances.min_by{|k, v| v}[0]
 		end
 
-		def calculate_distances	frazes, user_input		
+		def calculate_distances	frases, user_input		
 			distances = {}
-			frazes.each_with_index do |item, i|
+			frases.each_with_index do |item, i|
 				distances[i] = levenshtein_distance(user_input, item['text'])
 			end
 			distances

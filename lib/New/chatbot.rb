@@ -24,7 +24,8 @@ module Chat
 			
 			Chat.step_types = Chat.config['step_classes']
 			# You can create a new step-class with new logic, smtn like survey, pool or ... 
-			# After adding it to this list u will be able to include it in a question tree 
+			# After adding it to this list u will be able to include it in a question tree
+			# every step-class must have two methods implemented in Chat::Step mixin 
 		end
 
 		def check_tree_config

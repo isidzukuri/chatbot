@@ -3,7 +3,7 @@ require 'awesome_print'
 
 Dir['lib/mixins/*.rb'].each {|file| require_relative file }
 Dir['lib/*.rb'].each {|file| require_relative file }
-Dir['lib/steps/*.rb'].each {|file| require_relative file }
+# Dir['lib/steps/*.rb'].each {|file| require_relative file }
 
 # require_relative "lib/mixins/init"
 # require_relative "lib/mixins/personal_data"
@@ -18,6 +18,13 @@ Dir['lib/steps/*.rb'].each {|file| require_relative file }
 
 
 module Chat
+
+	class << self
+		@texts = {}
+		@config = {}
+		@step_types = []
+		attr_accessor :texts, :config, :step_types
+	end
 
 	include PersonalData
 

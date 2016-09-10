@@ -1,6 +1,8 @@
 module Chat
-	class Final < Step
+	class Final
 	
+		include Init
+		include Step
 		include Colorize
 
 		def print_text
@@ -17,9 +19,9 @@ module Chat
 			
 		end
 
-		def self.step_type_and_data data
+		def step_type_and_data data
 			prefix = data.delete('prefix') || ''
-			class_name = "#{prefix.capitalize}#{self.name.split('::').last}"
+			class_name = "#{prefix.capitalize}Final"
 			{:class => class_name, :data => data}
 		end
 	

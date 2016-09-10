@@ -5,7 +5,7 @@ module Chat
 
 		def next_step
 			step = nil
-			$step_types.each do |item|
+			Chat.step_types.each do |item|
 				step = get_class(item).step_type_and_data(instance_variable_get("@#{item}")) if has_type?(item)
 				break if step
 			end

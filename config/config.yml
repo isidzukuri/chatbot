@@ -1,3 +1,4 @@
 step_classes:
   - question
   - final
+levenstein_distance: 3

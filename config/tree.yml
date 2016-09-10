@@ -15,6 +15,7 @@ question:
                 text: Said to hear that. Whenever you change your mind - feel fre to send me a message  
                 final: # serves like an instruction for the exit
                   text: Hope to hear you soon! Bye!
+                  # prefix: happy #use HappyFinal class instead of simple Final
     # - text: i dont wont to be contacted
     #   question:
     #     text: 2st question
