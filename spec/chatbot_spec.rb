@@ -37,4 +37,12 @@ describe Chat::Chatbot do
     end
 	end
 
+  describe "#run" do
+    it "process a question with final" do
+      silence do 
+        expect{@item.run}.not_to raise_error 
+      end
+    end
+  end 
+
 end

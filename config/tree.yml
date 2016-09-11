@@ -24,7 +24,7 @@ question:
                         text: We are going to contact you using %contact%
                         answers: 
                           - text: Yes, Please
-                            final: # serves like an command 'exit'
+                            final: # serves like exit
                               text: Thanks! Bye!
                               prefix: happy
                           - text: Sorry, wrong %contact_type%

@@ -4,7 +4,7 @@ describe Chat::Branch do
 
   before :each do             
     @item = Chat::Branch.new("confirm_contact")
-    @tree = Chat::Chatbot.new .load_tree_config
+    @tree = Chat::Chatbot.new.load_tree_config
   end
 
   describe "#new" do
@@ -24,6 +24,14 @@ describe Chat::Branch do
       expect(@item.find_branch_by_label(@tree, "confirm_contact").keys).to include('question','text')
     end
   end
+
+  describe "#run" do
+    it "process a question with final" do
+      silence do 
+        expect{@item.run}.not_to raise_error 
+      end
+    end
+  end 
 
 
 end

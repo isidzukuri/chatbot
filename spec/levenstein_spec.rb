@@ -2,9 +2,6 @@ require_relative 'spec_helper'
 
 describe Chat::Levenstein do
 
-  class DummyClass
-  end
-
   before(:each) do
     @dummy_class = DummyClass.new
     @dummy_class.extend(Chat::Levenstein)

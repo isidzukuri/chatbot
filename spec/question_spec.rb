@@ -32,19 +32,21 @@ describe Chat::Question do
     end
   end 
 
-  # describe "#run" do
-  #   it "prints text" do
-  #     @question_with_final = Chat::Question.new(:text => "Who are you?", :final => {:text => "Hope to hear you soon! Bye!"})
-  #     expect { @question_with_final.run }.to output(/Who are you?/).to_stdout
-  #   end
-  # end 
+  describe "#run" do
+    it "prints text" do
+      @question_with_final = Chat::Question.new(:text => "Who are you?", :final => {:text => "Hope to hear you soon! Bye!"})
+      expect { @question_with_final.run }.to output(/Who are you?/).to_stdout
+    end
+  end 
 
-  # describe "#run" do
-  #   it "process a question with final" do
-  #     @question_with_final = Chat::Question.new(:text => "Who are you?", :final => {:text => "Hope to hear you soon! Bye!"})
-  #     expect(@question_with_final.run).to be_a SystemExit
-  #   end
-  # end 
+  describe "#run" do
+    it "process a question with final" do
+      @question_with_final = Chat::Question.new(:text => "Who are you?", :final => {:text => "Hope to hear you soon! Bye!"})
+      silence do 
+        expect{@question_with_final.run}.not_to raise_error 
+      end
+    end
+  end 
 
 
 end
