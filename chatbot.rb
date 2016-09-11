@@ -1,32 +1,10 @@
 require 'yaml'
+require 'sqlite3'
+require 'active_record'
 require 'awesome_print'
 
-Dir['lib/mixins/*.rb'].each {|file| require_relative file }
-Dir['lib/*.rb'].each {|file| require_relative file }
-# Dir['lib/steps/*.rb'].each {|file| require_relative file }
+['lib/mixins/*.rb', 'lib/*.rb', 'lib/models/*.rb'].each do |path|
+	Dir[path].each {|file| require_relative file }
+end 
 
-# require_relative "lib/mixins/init"
-# require_relative "lib/mixins/personal_data"
-# require_relative "lib/question"
-# require_relative "lib/answer"
-# require_relative "lib/chatbot"
-# require_relative "lib/final"
-# require_relative "lib/happy_final"
-
-
-
-
-
-module Chat
-
-	class << self
-		@texts = {}
-		@config = {}
-		@step_types = []
-		attr_accessor :texts, :config, :step_types
-	end
-
-	include PersonalData
-
-	Chatbot.new.run
-end
+Chat::Chatbot.new.run

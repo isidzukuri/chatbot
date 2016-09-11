@@ -1,0 +1,3 @@
+CREATE TABLE users(id INTEGER NOT NULL, name VARCHAR(100) DEFAULT '', PRIMARY KEY (id));
+CREATE TABLE messages(id INTEGER NOT NULL, text TEXT(500) DEFAULT '', user_id INTEGER, receiver_id INTEGER, PRIMARY KEY (id));
+CREATE TABLE infos(id INTEGER NOT NULL, email VARCHAR(50), phone INTEGER, contact_time VARCHAR(50), contact_type VARCHAR(50), user_id INTEGER,  PRIMARY KEY (id));

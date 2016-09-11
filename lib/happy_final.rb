@@ -4,7 +4,7 @@ module Chat
 	class HappyFinal < Final
 
 		def do_job
-			puts 'saving data ...'
+			Chat.user.info.save
 		end
 	
 	end

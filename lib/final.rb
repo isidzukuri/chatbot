@@ -1,26 +1,16 @@
 module Chat
 	class Final < Step
 	
-		include Colorize
-
-		def print_text
-			puts green(@text)
-		end
+		include ConsoleWriter
 
 		def run
 			do_job()
-			print_text()
-			exit
+			puts_bot_text(@text)
+			exit(true)
 		end
 
 		def do_job
 			
-		end
-
-		def self.step_type_and_data data
-			prefix = data.delete('prefix') || ''
-			class_name = "#{prefix.capitalize}#{self.name.split('::').last}"
-			{:class => class_name, :data => data}
 		end
 	
 	end

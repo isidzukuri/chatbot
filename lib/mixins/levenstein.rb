@@ -29,10 +29,10 @@ module Chat
 			distances.min_by{|k, v| v}[0]
 		end
 
-		def calculate_distances	frases, user_input		
+		def calculate_distances	frases, str		
 			distances = {}
 			frases.each_with_index do |item, i|
-				distances[i] = levenshtein_distance(user_input, item['text'])
+				distances[i] = levenshtein_distance(str, item)
 			end
 			distances
 		end

@@ -1,4 +1,8 @@
 step_classes:
   - question
   - final
+  - branch
 levenstein_distance: 3
+db:
+  adapter:  sqlite3
+  database: db/chatbot.db
