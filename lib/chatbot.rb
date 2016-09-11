@@ -8,8 +8,7 @@ module Chat
       db_connection()
       get_bot_user()
 
-      question = Question.new(Chat.tree['question'])
-      question.ask
+      Step.next_step(Chat.tree)
     end
 
     def load_configs

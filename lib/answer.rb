@@ -22,18 +22,14 @@ module Chat
     def process_input
       tree_position = nil
       @input.get_user_input 
-
       save_user_message(@input.user_input)      
       create_user(:name => @input.user_input) if @question.data_ia_a?('name')
-    
       if has_variants?
         tree_position = find_answer_in_variants()
       else
         set_answer_text()               
       end
-
       save_data()
-
       tree_position
     end
 
