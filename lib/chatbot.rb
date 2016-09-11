@@ -7,7 +7,6 @@ module Chat
       load_configs()
       db_connection()
       get_bot_user()
-
       Step.next_step(Chat.tree)
     end
 

@@ -99,10 +99,8 @@ module Chat
       set_answer_text(answer)
       if !answer
         answer = try_with_levenstein()
-    
-        ask_same_again() if !answer && !@question.retry
+        answer = ask_same_again() if !answer && !@question.retry
         set_answer_text(answer)
-
         answer = @question.fallback_behaviour() if !answer  
       end
       answer

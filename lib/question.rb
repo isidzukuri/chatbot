@@ -8,14 +8,17 @@ module Chat
 
     @retry = false
 
-    def ask
-      puts_bot_text(@text)
-      @answer = Answer.new(:question => self)
-      @answer.puts_comments()
+    def run
+      ask()
       process_answer()
     end
 
-    alias_method :run, :ask
+    def ask
+      puts_bot_text(@text)
+      get_answer
+      @answer.puts_comments()
+      @tree_position = @answer.process_input()
+    end
 
     def data
       @data ? @data.downcase : nil
@@ -27,10 +30,13 @@ module Chat
 
     private
 
+    def get_answer
+      @answer ||= Answer.new(:question => self)
+    end
+
     def process_answer      
-      tree_position = @answer.process_input()
-      tree_position ||= @init_vars
-      Step.next_step(tree_position)
+      @tree_position ||= @init_vars
+      Step.next_step(@tree_position)
     end
 
 
