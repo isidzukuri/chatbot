@@ -32,13 +32,6 @@ module Chat
       ['y', 'yes'].include?(@input.get_user_input.downcase) ? @answers[key] : false
     end
 
-    def ask_same_again
-      @retry = true
-      puts_bot_text(@texts['answer_again'])
-      puts_bot_text(@texts['ask_again'])
-      @question.ask()
-    end
-
     def find_answer_in_variants
       input = @input.user_input
       if input.length == 1 && input.to_i.between?(1, @answers.length)
