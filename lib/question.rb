@@ -4,9 +4,6 @@ module Chat
     include ConsoleWriter
     
     attr_reader :answers, :final
-    attr_accessor :retry
-
-    @retry = false
 
     def run
       ask()

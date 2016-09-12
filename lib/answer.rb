@@ -7,6 +7,7 @@ module Chat
     
     def initialize init_vars = {}
       super
+      @retry = false
       @input = ConsoleInput.new(@question)
       @answers = @question.answers
       @texts = Chat.texts
@@ -77,7 +78,7 @@ module Chat
     end
 
     def ask_same_again
-      @question.retry = true
+      @retry = true
       puts_bot_text(@texts['answer_again'])
       puts_bot_text(@texts['ask_again'])
       @question.ask()
@@ -99,7 +100,7 @@ module Chat
       set_answer_text(answer)
       if !answer
         answer = try_with_levenstein()
-        answer = ask_same_again() if !answer && !@question.retry
+        answer = ask_same_again() if !answer && !@retry
         set_answer_text(answer)
         answer = @question.fallback_behaviour() if !answer  
       end
