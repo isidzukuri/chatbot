@@ -28,7 +28,7 @@ module Chat
     private
 
     def get_answer
-      @answer ||= Answer.new(:question => self)
+      @answer ||= Answer.get_instance(self)
     end
 
     def process_answer      

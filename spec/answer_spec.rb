@@ -19,8 +19,8 @@ describe Chat::Answer do
   end
 
   describe "#puts_comments" do
-    it "print answer varriants if is set" do
-      expect{@item.puts_comments}.to output(/Lets talk/).to_stdout
+    it "prints text" do
+      expect{@item.puts_comments}.to output(/Enter answer/).to_stdout
     end
   end 
 
