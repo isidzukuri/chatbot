@@ -22,7 +22,7 @@ module Chat
     def load_tree_config
       tree = YAML.load_file("#{PATH}/config/tree.yml")
       raise ArgumentError, 'Configuration file config/tree.yml is empty.' if !tree
-      raise ArgumentError, 'U must set first question' if !tree['question']
+      # raise ArgumentError, 'U must set first question' if !tree['question']
       Chat.tree = tree
     end
 
