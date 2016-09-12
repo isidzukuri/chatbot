@@ -17,7 +17,14 @@ module Chat
     private
 
     def answer_result
-      find_answer_in_variants()
+      input = @input.user_input
+      if input.length == 1 && input.to_i.between?(1, @answers.length)
+        answer = @answers[input.to_i-1]
+      else
+        answer = process_text_input()
+      end
+      set_answer_text(answer)
+      answer
     end
 
     def print_answers
@@ -30,17 +37,6 @@ module Chat
       puts_bot_text("Did you mean '#{@answers[key]['text']}' ?")
       puts_bot_text(@texts['yes_or_no'])
       ['y', 'yes'].include?(@input.get_user_input.downcase) ? @answers[key] : false
-    end
-
-    def find_answer_in_variants
-      input = @input.user_input
-      if input.length == 1 && input.to_i.between?(1, @answers.length)
-        answer = @answers[input.to_i-1]
-      else
-        answer = process_text_input()
-      end
-      set_answer_text(answer)
-      answer
     end
 
     def process_text_input
