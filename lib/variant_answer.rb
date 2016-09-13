@@ -16,18 +16,6 @@ module Chat
     
     private
 
-    def answer_result
-      input = @input.user_input
-      if input.length == 1 && input.to_i.between?(1, @answers.length)
-        answer = @answers[input.to_i-1]
-      else
-        answer = process_text_input()
-      end
-      answer = @question.fallback_behaviour() if !answer
-      set_answer_text(answer)
-      answer
-    end
-
     def print_answers
       text = "#{@texts['possible_answers']}"
       @answers.each_with_index{|item, i| text = "#{text}\n \s\s#{i+1}) #{item['text']}"}
@@ -57,6 +45,18 @@ module Chat
 
     def set_answer_text(answer = nil)
       @text_answer = answer ? answer['text'] : @input.user_input
+    end
+
+    def answer_result
+      input = @input.user_input
+      if input.length == 1 && input.to_i.between?(1, @answers.length)
+        answer = @answers[input.to_i-1]
+      else
+        answer = process_text_input()
+      end
+      set_answer_text(answer)
+      answer = @question.fallback_behaviour() if !answer
+      answer
     end
 
   end
