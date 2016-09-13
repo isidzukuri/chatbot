@@ -23,6 +23,7 @@ module Chat
       else
         answer = process_text_input()
       end
+      answer = @question.fallback_behaviour() if !answer
       set_answer_text(answer)
       answer
     end
@@ -44,9 +45,7 @@ module Chat
       set_answer_text(answer)
       if !answer
         answer = try_with_levenstein()
-        answer = ask_same_again() if !answer && !@retry
-        set_answer_text(answer)
-        answer = @question.fallback_behaviour() if !answer  
+        answer = ask_same_again() if !answer && !@retry  
       end
       answer
     end
