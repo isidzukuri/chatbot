@@ -23,7 +23,7 @@ module Chat
       tree_position = nil
       @input.get_user_input 
       save_user_message(@input.user_input)      
-      create_user(:name => @input.user_input) if @question.data_ia_a?('name')
+      create_user(:name => @input.user_input) if @question.data_is_a?('name')
       tree_position = answer_result()               
       save_data()
       tree_position

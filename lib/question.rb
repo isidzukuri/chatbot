@@ -21,7 +21,7 @@ module Chat
       @data ? @data.downcase : nil
     end
 
-    def data_ia_a?(label)
+    def data_is_a?(label)
       !!(@data && @data == label)
     end
 

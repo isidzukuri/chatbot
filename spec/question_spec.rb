@@ -18,9 +18,9 @@ describe Chat::Question do
     end
   end
 
-  describe "#data_ia_a?" do
+  describe "#data_is_a?" do
     it "check is data equal to type" do
-      expect(@item.data_ia_a?('phone')).not_to be_nil 
+      expect(@item.data_is_a?('phone')).not_to be_nil 
     end
   end
 
