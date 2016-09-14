@@ -7,6 +7,7 @@ module Chat
     def initialize init_vars = {}
       super
       @answers = @question.answers
+      @input = ConsoleInput.new(@answers, Chat.config['levenstein_distance'])
     end
 
     def puts_comments

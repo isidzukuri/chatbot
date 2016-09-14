@@ -13,7 +13,7 @@ module Chat
     def initialize init_vars = {}
       super
       @retry = false
-      @input = ConsoleInput.new(@question)
+      @input = ConsoleInput.new
       @texts = Chat.texts
       @info_columns = Info.column_names
       @text_answer = ''

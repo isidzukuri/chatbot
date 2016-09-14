@@ -3,8 +3,9 @@ module Chat
 
     include Levenstein
 
-    def initialize host = nil
-      @host = host      
+    def initialize answers = [], distance = 3
+      @distance = distance
+      @answers = answers 
     end
     
     attr_reader :user_input
@@ -15,13 +16,13 @@ module Chat
 
     def compare
       to_lower = @user_input.downcase
-      @host.answers.find{|item| item['text'].downcase == to_lower}
+      @answers.find{|item| item['text'].downcase == to_lower}
     end
 
     def compare_levenstein
-      distances = calculate_distances(@host.answers.map{|a| a['text']}, @user_input)
+      distances = calculate_distances(@answers.map{|a| a['text']}, @user_input)
       lowest_distance_key = lowest_distance(distances)
-      lowest_distance_key = (distances[lowest_distance_key] <= Chat.config['levenstein_distance']) ? lowest_distance_key : false
+      lowest_distance_key = (distances[lowest_distance_key] <= @distance) ? lowest_distance_key : false
     end
     
   end

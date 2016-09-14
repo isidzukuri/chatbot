@@ -50,8 +50,8 @@ describe Chat::ConsoleInput do
 
   def with_mock_question
     answers = [{'text' => "Lets talk"}, {'text' => "ok"}, {'text' => "by"}]
-    question_with_answers = Chat::Question.new(:text => "Who are you?", :answers => answers)            
-    item = Chat::ConsoleInput.new(question_with_answers)
+    # question_with_answers = Chat::Question.new(:text => "Who are you?", :answers => answers)            
+    item = Chat::ConsoleInput.new(answers)
   end
 
  
