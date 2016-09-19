@@ -26,9 +26,13 @@ describe Chat::Branch do
 
   describe '#run' do
     it 'process a question with final' do
-      silence do
         expect { @item.run }.not_to raise_error
-      end
+    end
+  end
+
+  describe '#run' do
+    it 'process a question with final' do
+        expect(@item.run).to be_a(Hash)
     end
   end
 end

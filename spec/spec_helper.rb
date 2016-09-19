@@ -3,7 +3,8 @@ require 'sqlite3'
 require 'active_record'
 require 'awesome_print'
 
-['../lib/mixins/*.rb', '../lib/*.rb', '../lib/models/*.rb'].each do |path|
+dirs = ['../lib/*.rb', '../lib/models/*.rb', '../lib/steps/*.rb', '../lib/answers/*.rb']
+dirs.each do |path|
   Dir[path].each { |file| require_relative file }
 end
 
@@ -20,7 +21,20 @@ def silence
   @original_stdout = nil
 end
 
-Chat::Chatbot.new.load_tree_config
+ActiveRecord::Base.establish_connection(
+  adapter: 'sqlite3',
+  database: "../db/chatbot.db"
+)
 
-class DummyClass
+Chat.writer = Chat::ConsoleWriter.new
+Chat.user = Chat::UserData.new#(bot_user)
+
+
+def create_full_user
+  info = Info.create(:email => 'dasddas@sadda.dd', :phone => 123123, :contact_time => "ASAP", :contact_type => "Phone")
+  User.create( name: 'test', info: info )
+end
+
+def create_full_user_data
+  Chat::UserData.new Chat::Chatbot.new.bot_user, create_full_user
 end

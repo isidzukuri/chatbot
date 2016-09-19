@@ -13,37 +13,65 @@ describe Chat::Question do
 
   describe '#data' do
     it 'check is data set' do
-      expect { @item.data }.not_to raise_error
+      expect(@item.data).to be_nil
+    end
+  end
+
+  describe '#data' do
+    it 'check is data set' do
+      item = Chat::Question.new(text: 'Who are you?', data: 'phone')
+      expect(item.data).to be_a(String)
     end
   end
 
   describe '#data_is_a?' do
     it 'check is data equal to type' do
-      expect(@item.data_is_a?('phone')).not_to be_nil
+      expect(!!@item.data_is_a?('phone')).to eq false
     end
   end
 
-  describe '#run' do
-    it 'process a question' do
+  describe '#data_is_a?' do
+    it 'check is data equal to type' do
+      item = Chat::Question.new(text: 'Who are you?', data: 'phone')
+      expect(!!item.data_is_a?('phone')).to eq true
+    end
+  end
+
+  describe '#puts_text' do
+    it 'prints question text' do
       silence do
-        expect { @item.run }.to raise_error NotImplementedError
+        expect { @item.puts_text }.to output(/Who are you/).to_stdout
+      end
+    end
+  end
+
+  describe '#puts_text' do
+    it 'asks user to type' do
+      silence do
+        expect { @item.puts_text }.to output(/Enter answer/).to_stdout
+      end
+    end
+  end
+
+  describe '#puts_text' do
+    it 'prints answers variants' do
+      hash = Chat::Branch.new('confirm_contact').run
+      item = Chat::StepFactory.next_step(hash)
+      silence do
+        expect { item.puts_text }.to output(/Yes, Please/).to_stdout
       end
     end
   end
 
   describe '#run' do
-    it 'prints text' do
-      @question_with_final = Chat::Question.new(text: 'Who are you?', final: { text: 'Hope to hear you soon! Bye!' })
-      expect { @question_with_final.run }.to output(/Who are you?/).to_stdout
-    end
-  end
-
-  describe '#run' do
-    it 'process a question with final' do
-      @question_with_final = Chat::Question.new(text: 'Who are you?', final: { text: 'Hope to hear you soon! Bye!' })
+    it 'returns hash' do
       silence do
-        expect { @question_with_final.run }.not_to raise_error
+        hash = Chat::Branch.new('confirm_contact').run
+        item = Chat::StepFactory.next_step(hash)
+        expect(item.run).to be_a(Hash)
       end
     end
   end
+
+  
 end

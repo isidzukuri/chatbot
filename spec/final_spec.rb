@@ -11,15 +11,17 @@ describe Chat::Chatbot do
     end
   end
 
-  describe '#do_job' do
-    it 'do some job before exit' do
-      expect { @item.do_job }.not_to raise_error
+  describe "#run" do
+    it "prints text" do
+      expect { @item.run }.to output(/this is spar.... final!/).to_stdout
     end
   end
 
-  # describe "#run" do
-  #   it "prints text" do
-  #     expect { @item.run }.to output(/this is spar.... final!/).to_stdout
-  #   end
-  # end
+  describe '#run' do
+    it 'returns nil' do
+      silence do
+        expect(@item.run).to be_nil
+      end
+    end
+  end
 end

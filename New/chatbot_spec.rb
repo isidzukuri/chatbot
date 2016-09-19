@@ -32,7 +32,7 @@ describe Chat::Chatbot do
   describe '#get_bot_user' do
     it 'returns bot user' do
       @item.db_connection
-      expect(@item.get_bot_user).to be_a(User)
+      expect(@item.bot_user).to be_a(User)
     end
   end
 

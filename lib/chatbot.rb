@@ -5,12 +5,11 @@ module Chat
     def run
       load_configs
       db_connection
-
       Chat.user = UserData.new(bot_user)
       Chat.writer = ConsoleWriter.new(Chat.user)
-
-      ap User.last.info
       process_question_tree
+      
+      ap User.last.info
     end
 
     def load_configs
@@ -21,7 +20,6 @@ module Chat
     def load_tree_config
       tree = YAML.load_file("#{PATH}/config/tree.yml")
       raise ArgumentError, 'Not valid config/tree.yml' unless tree
-      # raise ArgumentError, 'U must set first question' if !tree['question']
       Chat.tree = tree
     end
 
