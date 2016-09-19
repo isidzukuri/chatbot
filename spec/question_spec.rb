@@ -26,14 +26,14 @@ describe Chat::Question do
 
   describe '#data_is_a?' do
     it 'check is data equal to type' do
-      expect(!!@item.data_is_a?('phone')).to eq false
+      expect(@item.data_is_a?('phone')).not_to eq true
     end
   end
 
   describe '#data_is_a?' do
     it 'check is data equal to type' do
       item = Chat::Question.new(text: 'Who are you?', data: 'phone')
-      expect(!!item.data_is_a?('phone')).to eq true
+      expect(item.data_is_a?('phone')).to eq true
     end
   end
 
@@ -72,6 +72,4 @@ describe Chat::Question do
       end
     end
   end
-
-  
 end

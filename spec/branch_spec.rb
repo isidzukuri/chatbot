@@ -20,19 +20,20 @@ describe Chat::Branch do
 
   describe '#find_branch_by_label' do
     it 'searhs branch i question tree' do
-      expect(@item.find_branch_by_label(@tree, 'confirm_contact').keys).to include('question', 'text')
+      keys = @item.find_branch_by_label(@tree, 'confirm_contact').keys
+      expect(keys).to include('question', 'text')
     end
   end
 
   describe '#run' do
     it 'process a question with final' do
-        expect { @item.run }.not_to raise_error
+      expect { @item.run }.not_to raise_error
     end
   end
 
   describe '#run' do
     it 'process a question with final' do
-        expect(@item.run).to be_a(Hash)
+      expect(@item.run).to be_a(Hash)
     end
   end
 end

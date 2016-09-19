@@ -13,11 +13,10 @@ describe Chat::AnswerFactory do
 
   describe '#get_instance' do
     it 'returns variant_answer object' do
-      answers = [{ 'text' => 'Lets talk' }, { 'text' => 'ok' }, { 'text' => 'by' }]
+      answers = [{ 'text' => 'Lets talk' }, { 'text' => 'ok' }]
       question = Chat::Question.new(text: '', answers: answers)
-      expect(Chat::AnswerFactory.get_instance(question)).to be_a(Chat::VariantAnswer)
+      instance = Chat::AnswerFactory.get_instance(question)
+      expect(instance).to be_a(Chat::VariantAnswer)
     end
   end
-
-  
 end

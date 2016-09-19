@@ -10,7 +10,7 @@ describe Chat::UserData do
       expect(@item.name).to be_a(String)
     end
   end
-  
+
   describe '#contact_type' do
     it 'returns string' do
       expect(@item.contact_type).to be_a(String)
@@ -25,23 +25,22 @@ describe Chat::UserData do
 
   describe '#save_data' do
     it 'saves user data and returns bool' do
-      expect(@item.save_data('phone','2628789')).to eq true
+      expect(@item.save_data('phone', '2628789')).to eq true
     end
   end
 
   describe '#save_data' do
     it 'not saves user data and returns bool' do
-      expect(@item.save_data('phone','2629')).to eq false
+      expect(@item.save_data('phone', '2629')).to eq false
     end
   end
-
 
   describe '#save_message' do
     it 'should return message instance' do
       expect(@item.save_message('some message')).to be_a(Message)
     end
   end
-  
+
   describe '#save_bot_message' do
     it 'should return message instance' do
       expect(@item.save_bot_message('some message')).to be_a(Message)
@@ -51,8 +50,7 @@ describe Chat::UserData do
   describe '#create' do
     it 'returns string' do
       item = Chat::UserData.new
-      expect(item.create(:name => 'Test')).to be_a(User)
+      expect(item.create(name: 'Test')).to be_a(User)
     end
   end
-
 end

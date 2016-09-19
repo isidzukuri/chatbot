@@ -11,8 +11,8 @@ describe Chat::Chatbot do
     end
   end
 
-  describe "#run" do
-    it "prints text" do
+  describe '#run' do
+    it 'prints text' do
       expect { @item.run }.to output(/this is spar.... final!/).to_stdout
     end
   end

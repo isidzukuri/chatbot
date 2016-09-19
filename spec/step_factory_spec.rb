@@ -13,9 +13,8 @@ describe Chat::StepFactory do
 
   describe '#next_step' do
     it 'should raise error' do
-      expect { Chat::StepFactory.next_step({}) }.to raise_error NotImplementedError
+      error = NotImplementedError
+      expect { Chat::StepFactory.next_step({}) }.to raise_error error
     end
   end
-
-  
 end
