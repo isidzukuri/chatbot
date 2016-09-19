@@ -6,17 +6,17 @@ module Chat
     def run
       load_configs()
       db_connection()
-      get_bot_user()
-      Step.next_step(Chat.tree)
+      
+      Chat.user = UserData.new(get_bot_user())
+      Chat.writer = ConsoleWriter.new(Chat.user)
+
+      ap User.last.info
+      process_question_tree()
     end
 
     def load_configs
       load_tree_config()
       Chat.config = YAML.load_file("#{PATH}/config/config.yml")
-      Chat.texts = YAML.load_file("#{PATH}/config/text.yml")
-      Chat.step_types = Chat.config['step_classes']
-      # You can create a new step-class with new logic, smtn like survey, poll, comment or greeting 
-      # After adding it to this list you will be able to include it in a question tree 
     end
 
     def load_tree_config
@@ -27,16 +27,22 @@ module Chat
     end
 
     def db_connection
-      ActiveRecord::Base.establish_connection(
-        adapter:  Chat.config['db']['adapter'],
-        database: "#{PATH}/#{Chat.config['db']['database']}"
-      )
+      ActiveRecord::Base.establish_connection(Chat.config['db'])
     end
 
     def get_bot_user
-      Chat.bot_user = User.find_or_create_by(name: 'ChatBot')
+      User.find_or_create_by(name: 'ChatBot')
     end
 
+    private
+
+    def process_question_tree
+      tree_position = Chat.tree
+      while tree_position
+        step = StepFactory.next_step(tree_position)
+        tree_position = step.run
+      end
+    end
 
   end
 end

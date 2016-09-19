@@ -26,7 +26,6 @@ question:
                           - text: Yes, Please
                             final: # serves like exit
                               text: Thanks! Bye!
-                              prefix: happy
                           - text: Sorry, wrong %contact_type%
                             branch: get_phone # GO TO branch with label 'get_phone'
                     - text: Morning
@@ -46,7 +45,6 @@ question:
                     - text: Yes, Please
                       final: 
                         text: Thanks! Bye!
-                        prefix: happy
                     - text: Sorry, wrong %contact_type%
                       branch: get_email
             - text: i dont wont to be contacted

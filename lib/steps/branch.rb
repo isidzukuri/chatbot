@@ -6,8 +6,7 @@ module Chat
     end
 
     def run
-      branch = find_branch_by_label(Chat.tree, @label)
-      Step.next_step(branch)
+      find_branch_by_label(Chat.tree, @label)
     end
 
     def find_branch_by_label(hash, label, parent = nil)
