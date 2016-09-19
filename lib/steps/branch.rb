@@ -1,6 +1,5 @@
 module Chat
   class Branch < Step
-
     def initialize(label)
       @label = label
     end
@@ -16,19 +15,14 @@ module Chat
           branch = parent ? parent : hash
           break
         end
-        if val.is_a? Hash
-          branch = find_branch_by_label(val, label, hash)
-        end
-        if !branch && val.is_a?(Array)
-          val.each do |item|
-            branch = find_branch_by_label(item, label, hash)
-            break if branch
-          end
+        branch = find_branch_by_label(val, label, hash) if val.is_a? Hash
+        next unless !branch && val.is_a?(Array)
+        val.each do |item|
+          branch = find_branch_by_label(item, label, hash)
+          break if branch
         end
       end
       branch
     end
-
-
   end
 end

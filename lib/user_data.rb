@@ -1,15 +1,14 @@
 module Chat
   class UserData
-
-    def initialize bot = nil, user = nil
+    def initialize(bot = nil, user = nil)
       @user = user
       @bot = bot
     end
 
-    def create hash
-      user_data = {:name => '', :info => Info.create()}
+    def create(hash)
+      user_data = { name: '', info: Info.create }
       user_data.merge!(hash)
-      @user = User.create(user_data) if !@user 
+      @user = User.create(user_data) unless @user
     end
 
     def name
@@ -22,25 +21,28 @@ module Chat
     end
 
     def contact
-      @user && @user.info.contact_type.present? ? @user.info[@user.info.contact_type.downcase] : ''
+      if @user && @user.info.contact_type.present?
+        @user.info[@user.info.contact_type.downcase]
+      else
+        ''
+      end
     end
 
-    def save_data key, val
+    def save_data(key, val)
       result = true
       if Info.column_names.include?(key)
         @user.info[key] = val
-        result = (val.present? && @user.info.valid?) ? @user.info.save : false    
+        result = val.present? && @user.info.valid? ? @user.info.save : false
       end
       result
     end
 
     def save_message(text)
-      Message.create(:text => text, :user => @user, :receiver => @bot) if @user
-    end
-    
-    def save_bot_message(text)
-      Message.create(:text => text, :user => @bot, :receiver => @user) if @user
+      Message.create(text: text, user: @user, receiver: @bot) if @user
     end
 
+    def save_bot_message(text)
+      Message.create(text: text, user: @bot, receiver: @user) if @user
+    end
   end
 end

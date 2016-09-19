@@ -4,8 +4,8 @@ require 'active_record'
 require 'awesome_print'
 
 ['../lib/mixins/*.rb', '../lib/*.rb', '../lib/models/*.rb'].each do |path|
-	Dir[path].each {|file| require_relative file }
-end 
+  Dir[path].each { |file| require_relative file }
+end
 
 def silence
   # Store the original stderr and stdout in order to restore them later
