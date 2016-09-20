@@ -3,6 +3,7 @@ require_relative 'spec_helper'
 describe Chat::Answer do
   before :each do
     @tree = Chat::Chatbot.new.load_tree_config
+    # copies part of questions tree
     hash = Chat::Branch.new('confirm_contact').run
     question = Chat::StepFactory.next_step(hash)
     Chat.user = create_full_user_data
