@@ -1,7 +1,7 @@
 module Chat
   class Final < Step
-    def run
-      @writer.puts_bot_text(@text)
+    def action
+      puts @text
       nil
     end
   end

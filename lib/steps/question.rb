@@ -1,14 +1,14 @@
 module Chat
   class Question < Step
-    attr_reader :answers
+    attr_reader :answers, :data_storage
 
-    def run
-      puts_text
+    def action
+      ask
       answer = answer_instance.process_input
       answer ? answer : @init_vars
     end
 
-    def puts_text
+    def ask
       text = @text
       if @answers
         text = "#{text}\nPossible answers:"
@@ -18,15 +18,11 @@ module Chat
         end
       end
       text = "#{text}\nEnter answer:"
-      @writer.puts_bot_text(text)
+      puts insert_values(text)
     end
 
     def data
       @data ? @data.downcase : nil
-    end
-
-    def data_is_a?(label)
-      @data && @data == label
     end
 
     private
@@ -34,5 +30,22 @@ module Chat
     def answer_instance
       @answer ||= AnswerFactory.get_instance(self)
     end
+
+    def insert_values(str)
+      if interlocutor
+        replace_hash = {
+          '%user_name%' => interlocutor.name,
+          '%contact_type%' => interlocutor.contact_type,
+          '%contact%' => interlocutor.contact
+        }
+        replace_hash.each { |k, v| str = str.gsub(k, v.to_s) }
+      end
+      str
+    end
+
+    def interlocutor
+      @data_storage.user
+    end
+
   end
 end

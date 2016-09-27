@@ -3,20 +3,28 @@ module Chat
     def initialize(question)
       @question = question
       @answer_text = ''
-      @user = Chat.user
+      @data_storage = question.data_storage
     end
 
     def process_input
       @tree_position = nil
       user_input = input
-      @user.save_message(user_input)
-      @user.create(name: user_input) if @question.data_is_a?('name')
       @tree_position = answer_result
-      save_data
+      save_data if data
+      @data_storage.save_message(user_input)
       @tree_position
     end
 
     private
+
+    def data
+      @question.data
+    end
+
+    def save_data
+      saved = @data_storage.save(data, @answer_text) 
+      @tree_position = fallback_behaviour unless saved
+    end
 
     def input
       @input = gets.chomp
@@ -25,11 +33,6 @@ module Chat
     def answer_result
       @answer_text = @input
       nil
-    end
-
-    def save_data
-      saved = @user.save_data(@question.data, @answer_text)
-      @tree_position = fallback_behaviour unless saved
     end
 
     def fallback_behaviour

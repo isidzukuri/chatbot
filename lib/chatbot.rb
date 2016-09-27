@@ -1,42 +1,32 @@
 module Chat
   class Chatbot
+    
     PATH = File.expand_path('../', File.dirname(__FILE__))
 
     def run
-      load_configs
-      db_connection
-      Chat.user = UserData.new(bot_user)
-      Chat.writer = ConsoleWriter.new(Chat.user)
-      process_question_tree
+      @tree = DialogTree.new(Config.load("#{PATH}/config/tree.yml"))
+      @data_storage = DataStorage.new(Config.load("#{PATH}/config/db.yml"))
+      # @writer = ConsoleWriter.new
+
+      ap User.last
+      ap User.last.info
+
+      # ap Message.all
+
+      process_dialog
     end
 
-    def load_configs
-      load_tree_config
-      Chat.config = YAML.load_file("#{PATH}/config/config.yml")
-    end
-
-    def load_tree_config
-      tree = YAML.load_file("#{PATH}/config/tree.yml")
-      raise ArgumentError, 'Not valid config/tree.yml' unless tree
-      Chat.tree = tree
-    end
-
-    def db_connection
-      ActiveRecord::Base.establish_connection(Chat.config['db'])
-    end
-
-    def bot_user
-      User.find_or_create_by(name: 'ChatBot')
-    end
 
     private
 
-    def process_question_tree
-      tree_position = Chat.tree
+    def process_dialog
+      tree_position = true
+      step = @tree.next_step
       while tree_position
-        step = StepFactory.next_step(tree_position)
-        tree_position = step.run
+        tree_position = step.run(@data_storage)
+        step = @tree.next_step(tree_position)
       end
     end
+
   end
 end
