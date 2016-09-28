@@ -5,12 +5,6 @@ describe Chat::Question do
     @item = Chat::Question.new(text: 'Who are you?')
   end
 
-  describe '#new' do
-    it 'returns a Question object' do
-      expect(@item).to be_a(Chat::Question)
-    end
-  end
-
   describe '#data' do
     it 'check is data set' do
       expect(@item.data).to be_nil
@@ -24,51 +18,36 @@ describe Chat::Question do
     end
   end
 
-  describe '#data_is_a?' do
-    it 'check is data equal to type' do
-      expect(@item.data_is_a?('phone')).not_to eq true
-    end
-  end
-
-  describe '#data_is_a?' do
-    it 'check is data equal to type' do
-      item = Chat::Question.new(text: 'Who are you?', data: 'phone')
-      expect(item.data_is_a?('phone')).to eq true
-    end
-  end
-
-  describe '#puts_text' do
+  describe '#ask' do
     it 'prints question text' do
       silence do
-        expect { @item.puts_text }.to output(/Who are you/).to_stdout
+        expect { @item.ask }.to output(/Who are you/).to_stdout
       end
     end
   end
 
-  describe '#puts_text' do
+  describe '#ask' do
     it 'asks user to type' do
       silence do
-        expect { @item.puts_text }.to output(/Enter answer/).to_stdout
+        expect { @item.ask }.to output(/Enter answer/).to_stdout
       end
     end
   end
 
-  describe '#puts_text' do
+  describe '#ask' do
     it 'prints answers variants' do
-      hash = Chat::Branch.new('confirm_contact').run
-      item = Chat::StepFactory.next_step(hash)
+      answers = [{ 'text' => 'Lets talk' }, { 'text' => 'ok' }]
+      question = Chat::Question.new(text: '', answers: answers)
       silence do
-        expect { item.puts_text }.to output(/Yes, Please/).to_stdout
+        expect { question.ask }.to output(/Lets talk/).to_stdout
       end
     end
   end
 
   describe '#run' do
-    it 'returns hash' do
+    it 'writes question, returns dialogs trees position' do
       silence do
-        hash = Chat::Branch.new('confirm_contact').run
-        item = Chat::StepFactory.next_step(hash)
-        expect(item.run).to be_a(Hash)
+        expect(@item.run(data_storage_with_user)).to be_a(Hash)
       end
     end
   end

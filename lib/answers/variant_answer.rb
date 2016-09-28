@@ -2,8 +2,6 @@ require_relative 'answer'
 
 module Chat
   class VariantAnswer < Answer
-    
-
     private
 
     def variants

@@ -22,7 +22,7 @@ module Chat
     end
 
     def save_data
-      saved = @data_storage.save(data, @answer_text) 
+      saved = @data_storage.save(data, @answer_text)
       @tree_position = fallback_behaviour unless saved
     end
 

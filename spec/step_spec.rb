@@ -5,15 +5,9 @@ describe Chat::Step do
     @item = Chat::Step.new(text: 'Who are you?')
   end
 
-  describe '#new' do
-    it 'returns object' do
-      expect(@item).to be_a(Chat::Step)
-    end
-  end
-
   describe '#run' do
-    it 'process a step' do
-      expect { @item.run }.to raise_error NotImplementedError
+    it 'should do step job' do
+      expect(@item).to respond_to :run
     end
   end
 end

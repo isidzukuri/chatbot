@@ -10,9 +10,10 @@ module Chat
       action
     end
 
+    private
+
     def action
       raise NotImplementedError, 'Implement "action" method in your class'
     end
-
   end
 end

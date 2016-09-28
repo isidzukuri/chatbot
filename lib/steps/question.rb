@@ -2,12 +2,6 @@ module Chat
   class Question < Step
     attr_reader :answers, :data_storage
 
-    def action
-      ask
-      answer = answer_instance.process_input
-      answer ? answer : @init_vars
-    end
-
     def ask
       text = @text
       if @answers
@@ -27,6 +21,12 @@ module Chat
 
     private
 
+    def action
+      ask
+      answer = answer_instance.process_input
+      answer ? answer : @init_vars
+    end
+
     def answer_instance
       @answer ||= AnswerFactory.get_instance(self)
     end
@@ -44,8 +44,7 @@ module Chat
     end
 
     def interlocutor
-      @data_storage.user
+      @data_storage ? @data_storage.user : nil
     end
-
   end
 end
