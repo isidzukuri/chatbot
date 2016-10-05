@@ -3,9 +3,11 @@ require 'sqlite3'
 require 'active_record'
 require 'awesome_print'
 
-['../lib/mixins/*.rb', '../lib/*.rb', '../lib/models/*.rb'].each do |path|
-	Dir[path].each {|file| require_relative file }
-end 
+dirs = ['lib/*.rb', 'lib/models/*.rb', 'lib/steps/*.rb', 'lib/answers/*.rb']
+
+dirs.each do |path|
+  Dir["../#{path}"].each { |file| require_relative file }
+end
 
 def silence
   # Store the original stderr and stdout in order to restore them later
@@ -20,7 +22,12 @@ def silence
   @original_stdout = nil
 end
 
-Chat::Chatbot.new.load_tree_config
-
-class DummyClass
+def data_storage_with_user
+  config = {
+    adapter: 'sqlite3',
+    database: '../db/chatbot.db'
+  }
+  data_storage = Chat::DataStorage.new(config)
+  data_storage.save('name', 'Test')
+  data_storage
 end
